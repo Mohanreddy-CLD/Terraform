@@ -7,5 +7,5 @@ resource "aws_route53_record" "www" {
   type    = "A"
   ttl     = 1
   # Dynamically fetches the public IP of each instance
-  records = [aws_instance.Ecom[each.key].public_ip] 
+  records = [aws_instance.Ecom[each.key].public_ip]
 }

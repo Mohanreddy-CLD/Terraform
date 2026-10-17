@@ -14,14 +14,14 @@ variable "instance_config" {
   description = "Map of instance names to create"
   type        = map(string)
   default = {
-    "Ecom-Web" = "web-server"
-    "Ecom-App" = "app-server"
-    "Ecom-DB"  = "database"
+    "Ecom-DB"    = "Mongodb"
+    "Ecom-cache" = "redis-server"
+    "Ecom-sql"   = "database"
   }
 }
 
 variable "instance_type" {
-  default     = {
+  default = {
     dev  = "t3.micro"
     prod = "t2.small"
   }
@@ -66,9 +66,9 @@ variable "sg_tags" {
 }
 
 variable "zone_id" {
-  default     = "Z05496083TGA6W64AEKNJ" # Replace with your actual Route53 Zone ID
+  default = "Z05496083TGA6W64AEKNJ" # Replace with your actual Route53 Zone ID
 }
 
 variable "domain_name" {
-  default     = "marpukosam.xyz" # Replace with your actual domain name
+  default = "marpukosam.xyz" # Replace with your actual domain name
 }

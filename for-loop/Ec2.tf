@@ -1,12 +1,12 @@
 resource "aws_instance" "Ecom" {
   # Using for_each to create multiple instances based on the map in variables
-  for_each               = var.instance_config
-  
-  ami                    = var.ami_id
+  for_each = var.instance_config
+
+  ami = var.ami_id
   # Corrected logic: Check var.environment instead of var.instance_type
   instance_type          = var.environment == "dev" ? "t3.micro" : "t2.small"
   vpc_security_group_ids = [aws_security_group.allow_all.id]
-  
+
   tags = {
     Name    = each.key # Assigns the name from the map key (e.g., Ecom-Web)
     purpose = var.ec2_tags["purpose"]
