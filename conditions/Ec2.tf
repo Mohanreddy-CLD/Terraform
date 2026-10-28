@@ -13,7 +13,7 @@ resource "aws_security_group" "allow_all" {
   name        = var.sg_name
   description = var.sg_description
 
-  ingress {
+  ingress {                               #this block defines the inbound rules for the security group
     from_port        = var.from_port
     to_port          = var.to_port
     protocol         = var.protocol

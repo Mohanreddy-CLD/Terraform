@@ -17,3 +17,24 @@ override.tf.json
 # CLI configuration file
 .terraformrc
 terraform.rc
+
+
+# Critical Best Practices
+
+# 1. Never Commit to Version Control: Do not push terraform.tfstate or terraform.tfstate.backup to Git. The state file contains plain-text sensitive data, including database passwords, private keys, and cloud API tokens. Always add it to your .gitignore.
+# 2. Use a Remote Backend: For team environments, store the state file remotely (e.g., in Amazon S3, Google Cloud Storage, or HCP Terraform). Remote backends provide:
+# 	• State Locking: Prevents two developers from running terraform apply concurrently and corrupting the state file.
+# 	• Encryption: Protects your sensitive data at rest.
+# 3. Do Not Edit Manually: Modifying the raw JSON file directly can easily corrupt your state. Instead, use the built-in Terraform CLI commands to safely manipulate it.
+
+# 🛠️ Common State Management Commands
+
+# • terraform state list – Lists all resources currently tracked by the state file.
+# • terraform state show <address> – Shows the detailed attributes of a specific tracked resource.
+# • terraform state rm <address> – Removes a resource from the state file (stops tracking it without destroying the actual infrastructure).
+# • terraform state mv <source> <destination> – Moves or renames a resource within the state file.
+# • terraform import <address> <id> – Brings an existing real-world resource under Terraform management by injecting it into the state file.
+
+#statemanagement s3 creation and locking 
+
+#aws s3api create-bucket --bucket ecom-terraform-state-unique-name-123 --region ap-south-1 --create-bucket-configuration LocationConstraint=ap-south-1
